@@ -1,0 +1,79 @@
+name: buildroot_sdk-CI
+
+on:
+  push:
+    branches:
+      - 2023.11.x
+  workflow_dispatch:
+    inputs:
+      manifest-url:
+        description: 'manifest-url'
+        required: true
+        default: 'https://github.com/pingwuu/buildroot_sdk-manifest.git'
+      manifest-branches-tags:
+        description: 'manifest-branches-tags'
+        required: true
+        default: 'main'
+      manifest-file:
+        description: 'manifest-file'
+        required: true
+        default: '2023.11.x.xml'
+      build-script:
+        description: 'build-script'
+        required: true
+        default: 'build_orangepi-pc-plus.sh'
+      board:
+        description: 'board'
+        required: true
+        default: 'orangepi-pc-plus'
+      build-with:
+        description: 'build-with'
+        required: false
+        default: ''
+
+jobs:
+  buildroot_sdk-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fetch Host Info
+      run: |
+        echo "Host Memory Info:"
+        echo "`free -h`"
+        echo "Host Disk Info:"
+        echo "`df -h`"
+        echo "Host CPU info:"
+        echo "`cat /proc/cpuinfo`"
+
+    - name: Install packages
+      run: |
+        #sudo apt-get update
+        #sudo apt-get upgrade
+        #sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
+        # Install repo tool and add to $PATH
+        mkdir $GITHUB_WORKSPACE/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > $GITHUB_WORKSPACE/bin/repo
+        chmod a+x $GITHUB_WORKSPACE/bin/repo
+        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+        echo "---GITHUB_PATH : $GITHUB_PATH"
+        
+    - name: Download source code
+      run: |                
+        # Download manifest repo and sync code
+        #git clone ${{github.event.inputs.git-address}} /opt/buildroot
+        #cd /opt/buildroot
+        mkdir -p /opt/buildroot_sdk
+        cd /opt/buildroot_sdk
+        repo init -u ${{github.event.inputs.manifest-url}} -b ${{github.event.inputs.manifest-branches-tags}} -m ${{github.event.inputs.manifest-file}}
+        repo sync
+      
+    - name: Bulid buildroot_sdk
+      run: |
+        cd /opt/buildroot_sdk
+        echo '---start build with : ${{github.event.inputs.build-script}}---'
+        bash ${{github.event.inputs.build-script}}
+
+    - name : Upload buildroot_sdk-${{github.event.inputs.board}} output/images
+      uses: actions/upload-artifact@master
+      with:
+        name: buildroot_sdk-${{github.event.inputs.board}}
+        path: /opt/buildroot_sdk/output_${{github.event.inputs.board}}/images
