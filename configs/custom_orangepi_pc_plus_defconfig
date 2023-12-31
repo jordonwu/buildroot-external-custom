@@ -11,9 +11,9 @@ BR2_TOOLCHAIN_EXTERNAL_LINARO_ARM=y
 
 #Build optios
 BR2_DL_DIR="$(TOPDIR)/../dl"
-BR2_PRIMARY_SITE="http://10.110.13.213:6543/mirror_soc/buildroot_downloads"
-BR2_CCACHE=y
-BR2_CCACHE_DIR="$(TOPDIR)/../.br-ccache"
+#BR2_PRIMARY_SITE="http://10.110.13.213:6543/mirror_soc/buildroot_downloads"
+#BR2_CCACHE=y
+#BR2_CCACHE_DIR="$(TOPDIR)/../.br-ccache"
 
 #System configuration
 BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV=y
