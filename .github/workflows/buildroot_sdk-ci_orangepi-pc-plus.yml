@@ -82,8 +82,8 @@ jobs:
         echo '---start build with : $BUILD_SCRIPT---'
         bash ${BUILD_SCRIPT}
 
-    - name : Upload buildroot_sdk-$BOARD} output/images
+    - name : Upload buildroot_sdk-${{BOARD}} output/images
       uses: actions/upload-artifact@master
       with:
         name: buildroot_sdk-${BOARD}
-        path: /opt/buildroot_sdk/output_${BOARD}/images
+        path: /opt/buildroot_sdk/output_${{BOARD}}/images
