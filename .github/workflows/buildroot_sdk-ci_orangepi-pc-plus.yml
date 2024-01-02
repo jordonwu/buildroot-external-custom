@@ -38,7 +38,7 @@ env:
   MANIFEST_BRANCHES_TAGS: "main"
   MANIFEST_FILE: "2023.11.x.xml"
   BUILD_SCRIPT: "build_orangepi-pc-plus.sh"
-  BOARD: "orangepi-pc-plus"
+  TARGET_BOARD: "orangepi-pc-plus"
 
 jobs:
   buildroot_sdk-build:
@@ -82,8 +82,8 @@ jobs:
         echo '---start build with : $BUILD_SCRIPT---'
         bash ${BUILD_SCRIPT}
 
-    - name : Upload buildroot_sdk-${{BOARD}} output/images
+    - name : Upload buildroot_sdk-${TARGET_BOARD} output/images
       uses: actions/upload-artifact@master
       with:
-        name: buildroot_sdk-${BOARD}
-        path: /opt/buildroot_sdk/output_${{BOARD}}/images
+        name: buildroot_sdk-${TARGET_BOARD}
+        path: /opt/buildroot_sdk/output_${TARGET_BOARD}/images
