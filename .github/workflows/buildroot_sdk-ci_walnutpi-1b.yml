@@ -1,4 +1,4 @@
-# github actions for buildroot sdk of board orangepi-pc-plus
+# github actions for buildroot sdk of board walnutpi-1b
 
 name: buildroot_sdk-ci_walnutpi-1b
 
