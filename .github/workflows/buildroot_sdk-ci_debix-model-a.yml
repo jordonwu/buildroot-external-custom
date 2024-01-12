@@ -1,0 +1,89 @@
+# github actions for buildroot sdk of board debix-model-a
+
+name: buildroot_sdk-ci_debix-model-a
+
+on:
+  push:
+    branches: ["main", "2023.11.x"]
+
+  workflow_dispatch:
+    #inputs:
+    #  manifest-url:
+    #    description: 'manifest-url'
+    #    required: true
+    #    default: 'https://github.com/pingwuu/buildroot_sdk-manifest.git'
+    #  manifest-branches-tags:
+    #    description: 'manifest-branches-tags'
+    #    required: true
+    #    default: 'main'
+    #  manifest-file:
+    #    description: 'manifest-file'
+    #    required: true
+    #    default: '2023.11.x.xml'
+    #  build-script:
+    #    description: 'build-script'
+    #    required: true
+    #    default: 'build_orangepi-pc-plus.sh'
+    #  board:
+    #    description: 'board'
+    #    required: true
+    #    default: 'orangepi-pc-plus'
+    #  build-with:
+    #    description: 'build-with'
+    #    required: false
+    #    default: ''
+
+env:
+  MANIFEST_URL: "https://github.com/pingwuu/buildroot_sdk-manifest.git"
+  MANIFEST_BRANCHES_TAGS: "main"
+  MANIFEST_FILE: "2023.11.x.xml"
+  BUILD_SCRIPT: "build_debix-model-a.sh"
+  BOARD: "debix-model-a"
+
+jobs:
+  buildroot_sdk-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fetch Host Info
+      run: |
+        echo "Host Memory Info:"
+        echo "`free -h`"
+        echo "Host Disk Info:"
+        echo "`df -h`"
+        echo "Host CPU info:"
+        echo "`cat /proc/cpuinfo`"
+
+    - name: Install packages
+      run: |
+        #sudo apt-get update
+        #sudo apt-get upgrade
+        #sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
+        # Install repo tool and add to $PATH
+        mkdir $GITHUB_WORKSPACE/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > $GITHUB_WORKSPACE/bin/repo
+        chmod a+x $GITHUB_WORKSPACE/bin/repo
+        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+        echo "---GITHUB_PATH : $GITHUB_PATH"
+        
+    - name: Download source code
+      run: |                
+        # Download manifest repo and sync code
+        mkdir -p /opt/buildroot_sdk
+        cd /opt/buildroot_sdk
+        #repo init -u ${{github.event.inputs.manifest-url}} -b ${{github.event.inputs.manifest-branches-tags}} -m ${{github.event.inputs.manifest-file}}
+
+        echo "--- repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE} ---"
+        repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE}
+        repo sync
+      
+    - name: Bulid buildroot_sdk
+      run: |
+        cd /opt/buildroot_sdk
+        echo '---start build with : $BUILD_SCRIPT---'
+        bash ${BUILD_SCRIPT}
+
+    - name : Upload buildroot_sdk-${{env.BOARD}} output/images
+      uses: actions/upload-artifact@master
+      with:
+        name: buildroot_sdk-${{env.BOARD}}
+        path: /opt/buildroot_sdk/output_${{env.BOARD}}/images
