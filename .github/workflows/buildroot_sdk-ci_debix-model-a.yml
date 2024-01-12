@@ -58,8 +58,7 @@ jobs:
         #sudo apt-get update
         #sudo apt-get upgrade
         #sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
-        sudo apt-get install -y libssl-dev uuid uuid-dev gnutls-dev swig python3-dev libfdt-dev python3-pip \
-          make cmake flex bison python3 sed binutils diffutils patch gzip bzip2 perl tar cpio unzip rsync bc findutils wget
+        sudo apt-get install -y libssl-dev uuid uuid-dev gnutls-dev swig python3-dev libfdt-dev python3-pip
         # Install repo tool and add to $PATH
         mkdir $GITHUB_WORKSPACE/bin
         curl https://storage.googleapis.com/git-repo-downloads/repo > $GITHUB_WORKSPACE/bin/repo
