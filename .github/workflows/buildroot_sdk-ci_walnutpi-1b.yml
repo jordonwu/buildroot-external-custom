@@ -3,8 +3,8 @@
 name: buildroot_sdk-ci_walnutpi-1b
 
 on:
-  push:
-    branches: ["main", "2023.11.x"]
+#    push:
+#    branches: ["main", "2023.11.x"]
 
   workflow_dispatch:
     #inputs:
