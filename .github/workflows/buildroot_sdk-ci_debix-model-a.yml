@@ -80,6 +80,8 @@ jobs:
     - name: Bulid buildroot_sdk
       run: |
         cd /opt/buildroot_sdk
+        echo '--- check repo content layout ---'
+        ls -alh
         echo '---start build with : $BUILD_SCRIPT---'
         bash ${BUILD_SCRIPT}
 
