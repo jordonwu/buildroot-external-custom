@@ -5,6 +5,10 @@ name: buildroot_sdk-ci_debix-model-a
 on:
   push:
     branches: ["main", "2023.11.x"]
+    paths:
+      - 'configs/custom_polyhex_debix_model_a_defconfig'
+      - 'utils/build_debix-model-a.sh'
+      - '.github/workflows/buildroot_sdk-ci_debix-model-a.yml'
 
   workflow_dispatch:
     #inputs:
