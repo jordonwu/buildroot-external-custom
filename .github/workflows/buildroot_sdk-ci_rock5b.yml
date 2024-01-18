@@ -5,7 +5,10 @@ name: buildroot_sdk-ci_rock5b
 on:
   push:
     branches: ["main", "2023.11.x"]
-
+    paths:
+      - 'configs/custom_radxa_rock5b_defconfig'
+      - 'utils/build_rock5b.sh'
+      - '.github/workflows/buildroot_sdk-ci_rock5b.yml'
   workflow_dispatch:
     #inputs:
     #  manifest-url:
