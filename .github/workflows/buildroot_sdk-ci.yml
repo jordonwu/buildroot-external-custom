@@ -8,7 +8,7 @@ on:
       manifest-url:
         description: 'manifest-url'
         required: true
-        default: 'https://github.com/pingwuu/buildroot_sdk-manifest.git'
+        default: 'https://github.com/jordonwu/buildroot_sdk-manifest.git'
       manifest-branches-tags:
         description: 'manifest-branches-tags'
         required: true
