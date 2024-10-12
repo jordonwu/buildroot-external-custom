@@ -46,7 +46,8 @@ env:
 
 jobs:
   buildroot_sdk-build:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Fetch Host Info
       run: |
