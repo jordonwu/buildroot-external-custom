@@ -60,7 +60,7 @@ jobs:
 
     - name: Install packages
       run: |
-        #sudo apt-get update
+        sudo apt-get update
         #sudo apt-get upgrade
         #sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
         sudo apt-get install -y libssl-dev uuid uuid-dev gnutls-dev swig python3-dev libfdt-dev python3-pip
