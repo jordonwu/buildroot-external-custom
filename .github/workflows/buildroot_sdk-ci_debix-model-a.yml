@@ -4,7 +4,7 @@ name: buildroot_sdk-ci_debix-model-a
 
 on:
   push:
-    branches: ["main", "2023.11.x"]
+    branches: ["main", "2024.11.x"]
     paths:
       - 'configs/custom_polyhex_debix_model_a_defconfig'
       - 'utils/build_debix-model-a.sh'
@@ -40,7 +40,7 @@ on:
 env:
   MANIFEST_URL: "https://github.com/jordonwu/buildroot_sdk-manifest.git"
   MANIFEST_BRANCHES_TAGS: "main"
-  MANIFEST_FILE: "2023.11.x.xml"
+  MANIFEST_FILE: "2024.11.x.xml"
   BUILD_SCRIPT: "build_debix-model-a.sh"
   BOARD: "debix-model-a"
 
