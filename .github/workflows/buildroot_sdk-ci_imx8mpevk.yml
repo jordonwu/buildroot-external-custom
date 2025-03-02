@@ -1,6 +1,6 @@
 # github actions for buildroot sdk of board debix-model-a
 
-name: buildroot_sdk-ci_debix-model-a
+name: buildroot_sdk-ci_imx8mpevk
 
 on:
   push:
@@ -60,12 +60,12 @@ jobs:
 
     - name: Install packages
       run: |
-        #sudo apt-get update
+        sudo apt-get update
         #sudo apt-get upgrade
         #sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
         sudo apt-get install -y libssl-dev uuid uuid-dev gnutls-dev swig python3-dev libfdt-dev python3-pip
-        echo "pip install pylibfdt"
-        pip install pylibfdt
+        #echo "pip install pylibfdt"
+        #pip install pylibfdt
         # Install repo tool and add to $PATH
         mkdir $GITHUB_WORKSPACE/bin
         curl https://storage.googleapis.com/git-repo-downloads/repo > $GITHUB_WORKSPACE/bin/repo
