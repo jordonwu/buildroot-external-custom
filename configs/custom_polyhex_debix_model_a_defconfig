@@ -15,7 +15,7 @@ BR2_CCACHE_DIR="$(TOPDIR)/../../.br-ccache"
 
 BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_6=y
 BR2_TARGET_GENERIC_GETTY_PORT="ttymxc1"
-BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL_CUSTOM_PATH)/board/polyhex/common/imx/imx8-bootloader-prepare.sh $(BR2_EXTERNAL_CUSTOM_PATH)/board/polyhex/common/imx/post-image.sh"
+BR2_ROOTFS_POST_IMAGE_SCRIPT="board/freescale/common/imx/imx8-bootloader-prepare.sh board/freescale/common/imx/post-image.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="${UBOOT_DIR}/arch/arm/dts/imx8mp-debix-model-a.dtb"
 
 # Kernel
