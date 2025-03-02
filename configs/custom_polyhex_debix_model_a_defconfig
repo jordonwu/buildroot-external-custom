@@ -16,7 +16,8 @@ BR2_CCACHE_DIR="$(TOPDIR)/../../.br-ccache"
 BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_6=y
 BR2_TARGET_GENERIC_GETTY_PORT="ttymxc1"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/freescale/common/imx/imx8-bootloader-prepare.sh board/freescale/common/imx/post-image.sh"
-BR2_ROOTFS_POST_SCRIPT_ARGS="${UBOOT_DIR}/arch/arm/dts/imx8mp-debix-model-a.dtb"
+#BR2_ROOTFS_POST_SCRIPT_ARGS="${UBOOT_DIR}/arch/arm/dts/imx8mp-debix-model-a.dtb"
+BR2_ROOTFS_POST_SCRIPT_ARGS="${UBOOT_DIR}/dts/upstream/src/arm64/freescale/imx8mp-debix-model-a.dtb"
 
 # Kernel
 BR2_LINUX_KERNEL=y
@@ -54,7 +55,7 @@ BR2_TARGET_UBOOT=y
 BR2_TARGET_UBOOT_BUILD_SYSTEM_KCONFIG=y
 BR2_TARGET_UBOOT_CUSTOM_GIT=y
 BR2_TARGET_UBOOT_CUSTOM_REPO_URL="https://github.com/jordonwu/u-boot.git"
-BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="v2024.10_dev"
+BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="v2025.01_dev"
 BR2_TARGET_UBOOT_BOARD_DEFCONFIG="imx8mp_debix_model_a_4g"
 #BR2_TARGET_UBOOT_CONFIG_FRAGMENT_FILES="board/freescale/imx8mpevk/uboot-fragment.config"
 BR2_TARGET_UBOOT_NEEDS_DTC=y
